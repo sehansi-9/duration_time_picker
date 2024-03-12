@@ -9,11 +9,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Duration Picker Demo',
+      title: 'Duration Time Picker Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Duration Picker Demo'),
+      home: const MyHomePage(title: 'Duration Time Picker Demo'),
     );
   }
 }
@@ -28,7 +28,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Duration _duration = Duration.zero;
+  Duration _durationMilli = Duration.zero;
+  Duration _durationSecond = Duration.zero;
+  Duration _durationMin = Duration.zero;
+  Duration _durationHour = Duration.zero;
 
   @override
   Widget build(BuildContext context) {
@@ -37,22 +40,53 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: GridView(
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           children: [
-            Expanded(
-              child: DurationTimePicker(
-                duration: _duration,
-                baseUnit: BaseUnit.second,
-                onChange: (val) {
-                  setState(() => _duration = val);
-                },
-              ),
+            DurationTimePicker(
+              duration: _durationMilli,
+              baseUnit: BaseUnit.millisecond,
+              circleColor: Colors.grey.withOpacity(0.5),
+              progressColor: Colors.blue.withOpacity(1),
+              onChange: (val) {
+                setState(
+                  () => _durationMilli = val,
+                );
+              },
+            ),
+            DurationTimePicker(
+              duration: _durationSecond,
+              baseUnit: BaseUnit.second,
+              progressColor: Colors.amber,
+              onChange: (val) {
+                setState(
+                  () => _durationSecond = val,
+                );
+              },
+            ),
+            DurationTimePicker(
+              duration: _durationMin,
+              baseUnit: BaseUnit.minute,
+              circleColor: Colors.pink,
+              onChange: (val) {
+                setState(
+                  () => _durationMin = val,
+                );
+              },
+            ),
+            DurationTimePicker(
+              duration: _durationHour,
+              baseUnit: BaseUnit.hour,
+              onChange: (val) {
+                setState(
+                  () => _durationHour = val,
+                );
+              },
             )
           ],
         ),
       ),
-      
     );
   }
 }

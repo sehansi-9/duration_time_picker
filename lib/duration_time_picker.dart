@@ -19,7 +19,7 @@ const double _kCircleTop = _kPiByTwo;
 class DialPainter extends CustomPainter {
   const DialPainter({
     required this.context,
-    required this.backgroundColor,
+    required this.circleColor,
     required this.accentColor,
     required this.theta,
     required this.textDirection,
@@ -31,7 +31,7 @@ class DialPainter extends CustomPainter {
     required this.labelStyle,
   });
 
-  final Color? backgroundColor;
+  final Color? circleColor;
   final Color accentColor;
   final double theta;
   final TextDirection textDirection;
@@ -56,7 +56,7 @@ class DialPainter extends CustomPainter {
     final pctTheta = (0.25 - (theta % _kTwoPi) / _kTwoPi) % 1.0;
 
     // Draw the background outer ring
-    canvas.drawCircle(centerPoint, radius, Paint()..color = backgroundColor!);
+    canvas.drawCircle(centerPoint, radius, Paint()..color = circleColor!);
 
     // Draw a translucent circle for every secondary unit
     for (var i = 0; i < baseUnitMultiplier; i = i + 1) {
@@ -125,7 +125,7 @@ class DialPainter extends CustomPainter {
             '$secondaryUnits${baseUnits.padLeft(2, '0')} ${baseUnitMultiplier == 0 ? getUnitString() : ''}',
         style: labelStyle ??
             Theme.of(context).textTheme.headlineMedium!.copyWith(
-                fontSize: size.shortestSide * 0.15, color: Colors.white),
+                fontSize: size.shortestSide * 0.15, color: Colors.black),
       ),
       textDirection: TextDirection.ltr,
     )..layout();
@@ -157,7 +157,7 @@ class DialPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(DialPainter oldDelegate) {
-    return oldDelegate.backgroundColor != backgroundColor ||
+    return oldDelegate.circleColor != circleColor ||
         oldDelegate.accentColor != accentColor ||
         oldDelegate.theta != theta ||
         oldDelegate.textDirection != textDirection ||
@@ -174,12 +174,12 @@ class _Dial extends StatefulWidget {
     required this.duration,
     required this.onChanged,
     this.baseUnit = BaseUnit.minute,
-    this.backgroundColor,
+    this.circleColor,
     this.labelStyle,
     this.progressColor,
   });
 
-  final Color? backgroundColor;
+  final Color? circleColor;
   final Color? progressColor;
   final TextStyle? labelStyle;
   final Duration duration;
@@ -495,7 +495,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
           baseUnit: widget.baseUnit,
           context: context,
           selectedValue: selectedDialValue,
-          backgroundColor: widget.backgroundColor,
+          circleColor: widget.circleColor,
           labelStyle: widget.labelStyle,
           accentColor: widget.progressColor!,
           theta: _theta.value,
@@ -513,7 +513,7 @@ class DurationTimePicker extends StatelessWidget {
   final BaseUnit baseUnit;
   final EdgeInsetsGeometry? padding;
   final double? size;
-  final Color? backgroundColor;
+  final Color? circleColor;
   final Color? progressColor;
   final TextStyle? labelStyle;
 
@@ -523,7 +523,7 @@ class DurationTimePicker extends StatelessWidget {
       required this.onChange,
       this.baseUnit = BaseUnit.minute,
       this.padding,
-      this.backgroundColor,
+      this.circleColor,
       this.labelStyle,
       this.progressColor,
       this.size})
@@ -546,7 +546,7 @@ class DurationTimePicker extends StatelessWidget {
               baseUnit: baseUnit,
               labelStyle: labelStyle,
               progressColor: progressColor ?? Colors.yellow,
-              backgroundColor: backgroundColor ?? Colors.black,
+              circleColor: circleColor ?? Colors.black,
             ),
           ),
         ],
