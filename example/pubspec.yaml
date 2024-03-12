@@ -4,10 +4,10 @@ publish_to: none
 version: 1.0.0
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=3.2.6 <4.0.0'
 
 dependencies:
-  duration_picker:
+  duration_time_picker:
     path: ../
   flutter:
     sdk: flutter
@@ -15,7 +15,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lint: ^1.10.0
+  flutter_lints: ^3.0.1
 
 flutter:
   uses-material-design: true
