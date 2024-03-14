@@ -4,13 +4,14 @@ Fork from flutter_duration_picker. https://github.com/juliansteenbakker/duration
 
 This package introduces a compact and intuitive widget 🛠️ designed for selecting durations ⏳, drawing significant inspiration from the Material Design Time Picker ⌚. Tailored to enhance user experience 🌟, this widget seamlessly integrates into your Flutter applications 📱, providing a straightforward and efficient way for users to input time durations 🔄.
 
-<img src="example.gif" height="480px" >
+<img src="https://raw.githubusercontent.com/cledsonv/duration_time_picker/master/example.gif" height="480px" >
+<img src="example2.png" height="200px" >
 
 ## Example Usage:
 
 ```yaml
 dependencies:
-  duration_time_picker: "^1.0.0"
+  duration_time_picker: ^1.0.0
 ```
 
 ```dart
