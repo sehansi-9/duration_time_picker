@@ -9,11 +9,6 @@ This package introduces a compact and intuitive widget 🛠️ designed for sele
 
 ## Example Usage:
 
-```yaml
-dependencies:
-  duration_time_picker: ^1.0.0
-```
-
 ```dart
 import 'package:duration_time_picker/duration_time_picker.dart';
 import 'package:flutter/material.dart';
