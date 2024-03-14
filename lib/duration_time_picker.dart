@@ -29,6 +29,7 @@ class DialPainter extends CustomPainter {
     required this.baseUnitHand,
     required this.baseUnit,
     required this.labelStyle,
+    required this.backgroundColor,
   });
 
   final Color? circleColor;
@@ -42,6 +43,7 @@ class DialPainter extends CustomPainter {
   final int baseUnitMultiplier;
   final int baseUnitHand;
   final BaseUnit baseUnit;
+  final Color backgroundColor;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -71,7 +73,7 @@ class DialPainter extends CustomPainter {
     canvas.drawCircle(
       centerPoint,
       radius * 0.88,
-      Paint()..color = Theme.of(context).canvasColor,
+      Paint()..color = backgroundColor,
     );
 
     // Get the offset point for an angle value of theta, and a distance of _radius
@@ -177,6 +179,7 @@ class _Dial extends StatefulWidget {
     this.circleColor,
     this.labelStyle,
     this.progressColor,
+    required this.backgroundColor,
   });
 
   final Color? circleColor;
@@ -185,6 +188,7 @@ class _Dial extends StatefulWidget {
   final Duration duration;
   final ValueChanged<Duration> onChanged;
   final BaseUnit baseUnit;
+  final Color backgroundColor;
 
   @override
   _DialState createState() => _DialState();
@@ -500,6 +504,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
           accentColor: widget.progressColor!,
           theta: _theta.value,
           textDirection: Directionality.of(context),
+          backgroundColor: widget.backgroundColor,
         ),
       ),
     );
@@ -516,6 +521,7 @@ class DurationTimePicker extends StatelessWidget {
   final Color? circleColor;
   final Color? progressColor;
   final TextStyle? labelStyle;
+  final Color? backgroundColor;
 
   const DurationTimePicker(
       {Key? key,
@@ -526,7 +532,8 @@ class DurationTimePicker extends StatelessWidget {
       this.circleColor,
       this.labelStyle,
       this.progressColor,
-      this.size})
+      this.size,
+      this.backgroundColor})
       : super(key: key);
 
   @override
@@ -541,6 +548,7 @@ class DurationTimePicker extends StatelessWidget {
         children: [
           Expanded(
             child: _Dial(
+              backgroundColor: backgroundColor ?? Theme.of(context).canvasColor,
               duration: duration,
               onChanged: onChange,
               baseUnit: baseUnit,
